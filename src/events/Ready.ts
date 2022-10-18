@@ -1,22 +1,25 @@
-import { Client, REST, Routes } from "discord.js";
+import { REST, Routes } from "discord.js";
 import Bot from "../structures/Bot";
 import BotCommands from "../structures/BotCommands";
 import BotEvent from "../structures/BotEvents";
 import { commandFiles } from "../utils/files";
+import chalk from 'chalk'
 
 export default class Ready extends BotEvent<'ready'> {
+    
     commandArray: BotCommands[]
     constructor(client: Bot) {
         super(
             client,
             'ready',
             true
-        )
-        this.commandArray = []
-    }
-
+            )
+            this.commandArray = []
+        }
+        
     public async execute(): Promise<void> {
         console.clear()
+        await console.log(`client => ${chalk.green('Ready')}`)
         
 
         let tasks: Promise<unknown>[] = [];
@@ -33,7 +36,7 @@ export default class Ready extends BotEvent<'ready'> {
         
         this.commandArray.forEach((command) => {
             this.client.commands.set(command.data.name, command)
-            console.log(`Registered command ${command.data.name}`)
+            console.log(`> Registered command ${chalk.blue(`${command.data.name}`)}`)
         })  
 
         const payload = this.commandArray.map((cmd) => cmd.data)
@@ -45,7 +48,7 @@ export default class Ready extends BotEvent<'ready'> {
         await rest.put(Routes.applicationCommands(this.client.user?.id!), {
             body: payload,
         }).then(() => {
-            console.log('Successfully registered all commands')
+            console.log(`> Successfully registered ${chalk.green(`${payload.length}`)} commands`)
         });
 
         // const payload = this.commandArray.map((cmd) => cmd.data)
