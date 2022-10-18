@@ -24,8 +24,8 @@ export default class pay {
         if(!receiverProfile) return this.interaction.reply({content: `they dont have a profile`})
 
         const confirmationEmbed = new EmbedBuilder()
-            .setTitle(`Confirm That You are paying [${receiverProfile.rank}] ${receiverProfile.name}`)
-            .setDescription(`You Are Paying [${receiverProfile.rank}] ${receiverProfile.name}: ${taxed} TermaCoins`)
+            .setTitle(`Confirm That You are paying [${receiverProfile.rank}] ${(await this.client.users.fetch(receiverProfile.id)).username}`)
+            .setDescription(`You Are Paying [${receiverProfile.rank}] ${(await this.client.users.fetch(receiverProfile.id)).username}: ${taxed} TermaCoins`)
             .setColor('Blue')
         
         const button = new ActionRowBuilder<ButtonBuilder>()
@@ -50,11 +50,11 @@ export default class pay {
             componentType: ComponentType.Button,
             time: 30000
         })
-        .then((interaction) => {
+        .then(async (interaction) => {
             if(interaction.customId === 'confirm') {
                 if(!(interaction.user.id == this.interaction.user.id)) return
                 const confirmedEmbed = new EmbedBuilder()
-                    .setTitle(`payment confirmed towards [${receiverProfile.rank}] ${receiverProfile.name} of ${taxed} TermaCoins`)
+                    .setTitle(`payment confirmed towards [${receiverProfile.rank}] ${(await this.client.users.fetch(receiverProfile.id)).username} of ${taxed} TermaCoins`)
                     .setColor('Green')
                 this.interaction.editReply({content: ``, embeds: [confirmedEmbed], components: []})
 
@@ -76,7 +76,7 @@ export default class pay {
             } else {
                 if(!(interaction.user.id == this.interaction.user.id)) return
                 const deniedEmbed = new EmbedBuilder()
-                    .setTitle(`payment denied towards [${receiverProfile.rank}] ${receiverProfile.name} of ${taxed} TermaCoins`)
+                    .setTitle(`payment denied towards [${receiverProfile.rank}] ${(await this.client.users.fetch(receiverProfile.id)).username} of ${taxed} TermaCoins`)
                     .setColor('Red')
                 this.interaction.editReply({content: ``, embeds: [deniedEmbed], components: []})
             }

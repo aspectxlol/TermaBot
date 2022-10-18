@@ -14,7 +14,7 @@ export default class profile {
     public async execute() {
         const userArg = this.interaction.options.getUser('user')
             if(!userArg) {
-                if(!(await getProfile(this.interaction.user.id))) await createProfile(this.interaction.user)
+                if(!(await getProfile(this.interaction.user.id))) await createProfile(this.interaction.user.id)
                 const profile = await getProfile(this.interaction.user.id)
                 const embed = new EmbedBuilder()
                     .setTitle(`[${profile?.rank}] ${this.interaction.user.username}'s profile`)
@@ -25,7 +25,7 @@ export default class profile {
 
                 return this.interaction.reply({embeds: [embed]})
             } else {
-                if(!(await getProfile(userArg.id))) await createProfile(userArg)
+                if(!(await getProfile(userArg.id))) await createProfile(userArg.id)
                 const profile = await getProfile(userArg.id)
                 const embed = new EmbedBuilder()
                     .setTitle(`[${profile?.rank}] ${userArg.username}'s profile`)

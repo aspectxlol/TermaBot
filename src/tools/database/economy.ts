@@ -4,16 +4,16 @@ import { QuickDB } from 'quick.db'
 const ecoDB = new QuickDB({filePath: `src/database/economy.sqlite`})
 
 export interface profile {
-    name: string
+    id: string
     rank: string
     balance: number
     inventory: string[]
 }
 
-export const createProfile = async (user: User) => {
-    return await ecoDB.set(`${user.id}`, {
-        name: `${user.tag}`,
-        rank: ``,
+export const createProfile = async (userId: string) => {
+    return await ecoDB.set(`${userId}`, {
+        id: userId,
+        rank: `Default`,
         balance: 0,
         inventory: []
     }) as profile
