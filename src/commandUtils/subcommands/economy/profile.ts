@@ -1,6 +1,6 @@
 import { CacheType, ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
-import Bot from "../../structures/Bot";
-import { createProfile, getProfile } from "../../tools/database/economy";
+import Bot from "../../../structures/Bot";
+import { createProfile, getProfile } from "../../../tools/database/economy";
 
 export default class profile {
     interaction: ChatInputCommandInteraction<CacheType>

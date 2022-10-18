@@ -1,9 +1,9 @@
 import { CacheType, ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder } from "discord.js";
-import userOption from "../../options/userOption";
+import userOption from "../../commandUtils/options/userOption";
 import Bot from "../../structures/Bot";
 import BotCommands from "../../structures/BotCommands";
-import pay from "../../subcommands/economy/pay";
-import profile from "../../subcommands/economy/profile";
+import pay from "../../commandUtils/subcommands/economy/pay";
+import profile from "../../commandUtils/subcommands/economy/profile";
 
 class economy extends BotCommands {
     constructor() {
