@@ -1,4 +1,5 @@
 import { CacheType, ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder } from "discord.js";
+import userOption from "../../options/userOption";
 import Bot from "../../structures/Bot";
 import BotCommands from "../../structures/BotCommands";
 import pay from "../../subcommands/economy/pay";
@@ -13,20 +14,12 @@ class economy extends BotCommands {
                 .addSubcommand(subcommand => subcommand
                     .setName('profile')
                     .setDescription('view someones profile')
-                    .addUserOption(op => op
-                        .setName('user')
-                        .setDescription('the profile of a user')
-                        .setRequired(false)
-                    )
+                    .addUserOption(new userOption().data)
                 )
                 .addSubcommand(subcommand => subcommand
                     .setName('pay')
                     .setDescription('pay someone')
-                    .addUserOption(op => op
-                        .setName('user')
-                        .setDescription('the profile of a user')
-                        .setRequired(true)
-                    )
+                    .addUserOption(new userOption().data)
                     .addNumberOption(op => op
                         .setName('amount')
                         .setDescription('the payment amount')

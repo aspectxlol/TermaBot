@@ -1,4 +1,5 @@
 import { CacheType, ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder } from "discord.js";
+import memberOption from "../../options/memberOption";
 import Bot from "../../structures/Bot";
 import BotCommands from "../../structures/BotCommands";
 import { hasGuildAdmin } from "../../tools/userPerms";
@@ -9,11 +10,7 @@ class ban extends BotCommands {
             new SlashCommandBuilder()
                 .setName('ban')
                 .setDescription('ban a user')
-                .addUserOption(op => op
-                    .setName('member')
-                    .setDescription('the member being banned')
-                    .setRequired(true)
-                )
+                .addUserOption(new memberOption().data)
                 .addStringOption(op => op
                     .setName('reason')    
                     .setDescription('the reason the member is being banned')

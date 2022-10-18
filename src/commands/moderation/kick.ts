@@ -1,4 +1,5 @@
 import { CacheType, ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder } from "discord.js";
+import memberOption from "../../options/memberOption";
 import Bot from "../../structures/Bot";
 import BotCommands from "../../structures/BotCommands";
 import { hasGuildAdmin } from "../../tools/userPerms";
@@ -9,11 +10,7 @@ class kick extends BotCommands {
             new SlashCommandBuilder()
                 .setName('kick')
                 .setDescription('kick a member')
-                .addUserOption(op => op
-                    .setName('member')
-                    .setDescription('the member to be kicked')
-                    .setRequired(true)
-                )
+                .addUserOption(new memberOption().data)
                 .addStringOption(op => op
                     .setName('reason')
                     .setDescription('the reason the member is to be kicked')
