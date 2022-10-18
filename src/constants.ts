@@ -1,0 +1,1 @@
+export const TAX_AMOUNT_IN_PERCENTAGE = 5

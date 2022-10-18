@@ -28,10 +28,14 @@ export const setBalance = async (userId: string, balance: number) => {
     return await ecoDB.set(`${userId}.balance`, balance) as number
 }
 
-export const addBalance = async (userId: string, addition: number) => {
-    return await ecoDB.add(`${userId}.balance`, addition) as number
+export const addBalance = async (userId: string, amount: number) => {
+    return await ecoDB.add(`${userId}.balance`, amount) as number
 }
 
 export const getBalance = async (userId: string) => {
     return await ecoDB.get(`${userId}.balance`) as number
+}
+
+export const removeBalance = async (userId: string, amount: number) => {
+    return ecoDB.add(`${userId}.balance`, -amount)
 }

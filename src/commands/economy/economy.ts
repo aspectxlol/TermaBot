@@ -1,7 +1,8 @@
 import { CacheType, ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder } from "discord.js";
 import Bot from "../../structures/Bot";
 import BotCommands from "../../structures/BotCommands";
-import { createProfile, getProfile } from "../../tools/database/economy";
+import pay from "../../subcommands/economy/pay";
+import profile from "../../subcommands/economy/profile";
 
 class economy extends BotCommands {
     constructor() {
@@ -15,6 +16,22 @@ class economy extends BotCommands {
                     .addUserOption(op => op
                         .setName('user')
                         .setDescription('the profile of a user')
+                        .setRequired(false)
+                    )
+                )
+                .addSubcommand(subcommand => subcommand
+                    .setName('pay')
+                    .setDescription('pay someone')
+                    .addUserOption(op => op
+                        .setName('user')
+                        .setDescription('the profile of a user')
+                        .setRequired(true)
+                    )
+                    .addNumberOption(op => op
+                        .setName('amount')
+                        .setDescription('the payment amount')
+                        .setMinValue(1)
+                        .setRequired(true)
                     )
                 )
                 .toJSON(),
@@ -23,22 +40,9 @@ class economy extends BotCommands {
     }
 
     public async execute(interaction: ChatInputCommandInteraction<CacheType>, client: Bot): Promise<any> {
-        console.log(await getProfile(interaction.user.id))
         const subcommand = interaction.options.getSubcommand()
-        if(subcommand === 'profile') {
-            const userArg = interaction.options.getUser('user')
-            if(!userArg) {
-                if(!(await getProfile(interaction.user.id))) await createProfile(interaction.user)
-                const profile = await getProfile(interaction.user.id)
-                const embed = new EmbedBuilder()
-                    .setTitle(`${interaction.user.username}\`s profile`)
-                    .addFields([
-                        {name: `Balance`, value: `${profile?.balance}`}
-                    ])
-
-                return interaction.reply({embeds: [embed]})
-            }
-        }
+        if(subcommand == 'profile') { return new profile(interaction, client).execute() }
+        else if(subcommand === 'pay') { return new pay(interaction, client).execute() }
     }
 }
 
