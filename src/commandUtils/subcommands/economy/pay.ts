@@ -1,9 +1,9 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, CacheType, ChatInputCommandInteraction, ComponentType, EmbedBuilder, Emoji } from "discord.js";
-import Bot from "../../structures/Bot";
-import { addBalance, getProfile, removeBalance } from "../../tools/database/economy";
+import Bot from "../../../structures/Bot";
+import { addBalance, getProfile, removeBalance } from "../../../tools/database/economy";
 import { v4 } from 'uuid'
-import { TAX_AMOUNT_IN_PERCENTAGE } from "../../constants";
-import { addReceipts } from "../../tools/database/receipts";
+import { TAX_AMOUNT_IN_PERCENTAGE } from "../../../constants";
+import { addReceipts } from "../../../tools/database/receipts";
 
 export default class pay {
     interaction: ChatInputCommandInteraction<CacheType>

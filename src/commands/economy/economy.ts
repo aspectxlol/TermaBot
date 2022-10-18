@@ -14,12 +14,12 @@ class economy extends BotCommands {
                 .addSubcommand(subcommand => subcommand
                     .setName('profile')
                     .setDescription('view someones profile')
-                    .addUserOption(new userOption().data)
+                    .addUserOption(new userOption(false).data)
                 )
                 .addSubcommand(subcommand => subcommand
                     .setName('pay')
                     .setDescription('pay someone')
-                    .addUserOption(new userOption().data)
+                    .addUserOption(new userOption(true).data)
                     .addNumberOption(op => op
                         .setName('amount')
                         .setDescription('the payment amount')
