@@ -58,7 +58,7 @@ export default class pay {
                     .setColor('Green')
                 this.interaction.editReply({content: ``, embeds: [confirmedEmbed], components: []})
 
-                removeBalance(`${this.interaction.user.id}`, amount!).then(() => {
+                removeBalance(`${this.interaction.user.id}`, amount!).then(async () => {
                     addBalance(`${this.interaction.options.getUser('user')?.id!}`, taxed)
                     const id = v4()
                     addReceipts(
@@ -71,7 +71,8 @@ export default class pay {
                         .setTitle('Payment Successfull')
                         .setDescription(`Payment ID: ${id}`)
                         .setColor('Blue')
-                    this.interaction.channel?.send({embeds: [receipt]})
+                    this.interaction.user?.send({embeds: [receipt]});
+                    (await this.client.users.fetch(receiverProfile.id)).send({content: `Money Transfered`, embeds: [receipt]})
                 })
             } else {
                 if(!(interaction.user.id == this.interaction.user.id)) return
