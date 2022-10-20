@@ -1,8 +1,8 @@
 import { ActionRowBuilder, ModalSubmitInteraction, CacheType, ChatInputCommandInteraction, ModalBuilder, SlashCommandBuilder, TextInputBuilder, TextInputStyle } from "discord.js";
-import Bot from "../structures/Bot";
-import BotCommands from "../structures/BotCommands";
-import { hasBotAdmin } from "../tools/userPerms";
-import { check } from "../utils/utils";
+import Bot from "../../structures/Bot";
+import BotCommands from "../../structures/BotCommands";
+import { hasBotAdmin } from "../../tools/userPerms";
+import { check } from "../../utils/utils";
 
 class Eval extends BotCommands {
     constructor() {

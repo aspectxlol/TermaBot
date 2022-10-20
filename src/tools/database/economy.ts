@@ -20,8 +20,12 @@ export const createProfile = async (userId: string) => {
 }
 
 export const getProfile = async (userId: string) => {
-    if(!(await ecoDB.get(`${userId}.name`))) return null
+    if(!(await ecoDB.get(`${userId}.id`))) return null
     return await ecoDB.get(`${userId}`) as profile
+}
+
+export const configureProfile = async (key: string, value: string) => {
+    return await ecoDB.set(key, value)
 }
 
 export const setBalance = async (userId: string, balance: number) => {
